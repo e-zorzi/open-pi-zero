@@ -78,7 +78,7 @@ cond_steps: 1
 horizon_steps: 4
 action_dim: 7 # EEF_POS
 proprio_dim: 7  # POS_EULER
-max_seq_len: 256  # fixed 256 for image + max 20 for text
+max_seq_len: 276  # fixed 256 for image + max 20 for text
 tokenizer_padding: max_length # instead of truncating to longest
 max_image_text_tokens: ${max_seq_len}
 
