@@ -689,12 +689,13 @@ if __name__ == "__main__":
     from omegaconf import OmegaConf
     from PIL import Image
     from transformers import AutoTokenizer
-
+    from rich.pretty import pprint
     from src.model.vla.processing import VLAProcessor
 
     parser = argparse.ArgumentParser()
     parser.add_argument("--text_only", action="store_true")
     parser.add_argument("--load_pretrained_weights", action="store_true")
+    parser.add_argument("--paligemma2", action="store_false")
     parser.add_argument("--cpu", action="store_true")
     parser.add_argument("--loss_only", action="store_true")
     parser.add_argument("--use_bf16", action="store_true")
@@ -703,8 +704,11 @@ if __name__ == "__main__":
     assert not (args.text_only and args.loss_only)
 
     torch.manual_seed(args.seed)
-
-    config = OmegaConf.load("config/train/bridge.yaml")
+    if args.paligemma2:
+        config = OmegaConf.load("config/train/bridge_paligemma2.yaml")
+    else:
+        config = OmegaConf.load("config/train/bridge.yaml")
+    pprint(config)
     if args.text_only:
         config.use_lm_head = True
         config.mixture.vlm.use_final_norm = True
