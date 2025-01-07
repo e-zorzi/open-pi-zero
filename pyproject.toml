@@ -29,6 +29,7 @@ dependencies = [
     "transformers",
     "tqdm",
     "wandb",
+    "rich>=13.9.4",
 ]
 
 [build-system]
